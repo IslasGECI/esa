@@ -14,5 +14,6 @@ RUN pip install \
     pytest-cov \
     pytest==5.0.1 \
     rope \
-    scipy 
+    scipy \
+    typer
 CMD make
