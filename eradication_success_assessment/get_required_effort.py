@@ -16,11 +16,11 @@ def get_required_effort(name: str = "data/raw/data.csv", seed: bool = False):
     capture_date = pd.to_datetime("2019-11-09")
     datafile: str = name
     data = pd.read_csv(datafile)
-    date = pd.to_datetime(data.Fecha)
-    is_before_capture = date <= capture_date
-    data_before_capture = data[is_before_capture]
-    is_after_capture = date > capture_date
-    data_after_capture = data[is_after_capture]
+    #date = pd.to_datetime(data.Fecha)
+    #is_before_capture = date <= capture_date
+    data_before_capture = _get_date_before_capture(data, capture_date) #data[is_before_capture]
+    #is_after_capture = date > capture_date
+    data_after_capture = _get_date_after_capture(data, capture_date)#data[is_after_capture]
     effort_without_sighted = data_before_capture["Cantidad_de_trampas_activas"].sum()
     data_before_capture["is_sighting"] = (
         data_before_capture.Cantidad_de_avistamientos != 0
@@ -86,6 +86,17 @@ $\\alpha=$\\py{'%4.2f'% effort['significance_level']}.
 """
     )
 
+def _get_date_before_capture(data: pd.DataFrame, capture_date):
+    date: pd.DataFrame = pd.to_datetime(data.Fecha)
+    is_before_capture = date <= capture_date
+    data_before_capture = data[is_before_capture]
+    return data_before_capture
+
+def _get_date_after_capture(data: pd.DataFrame, capture_date):
+    date: pd.DataFrame = pd.to_datetime(data.Fecha)
+    is_after_capture = date > capture_date
+    data_after_capture = data[is_after_capture]
+    return data_after_capture
 
 if __name__ == "__main__":
     app()
