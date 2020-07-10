@@ -11,16 +11,19 @@ app = typer.Typer()
 
 @app.command()
 def get_required_effort(name: str = "data/raw/data.csv", seed: bool = False):
-    if seed:
-        np.random.seed(3)
     capture_date = pd.to_datetime("2019-11-09")
+
     datafile: str = name
     data = pd.read_csv(datafile)
-    #date = pd.to_datetime(data.Fecha)
-    #is_before_capture = date <= capture_date
-    data_before_capture = _get_date_before_capture(data, capture_date) #data[is_before_capture]
-    #is_after_capture = date > capture_date
-    data_after_capture = _get_date_after_capture(data, capture_date)#data[is_after_capture]
+    output = make_fit(data, capture_date, seed)
+    print(output)
+
+def make_fit(data, capture_date, seed: bool = False):
+    if seed:
+        np.random.seed(3)
+    data_before_capture = _get_date_before_capture(data, capture_date) 
+    data_after_capture = _get_date_after_capture(data, capture_date)
+
     effort_without_sighted = data_before_capture["Cantidad_de_trampas_activas"].sum()
     data_before_capture["is_sighting"] = (
         data_before_capture.Cantidad_de_avistamientos != 0
@@ -36,7 +39,7 @@ def get_required_effort(name: str = "data/raw/data.csv", seed: bool = False):
     ].sum()
 
     n_effort_per_sighting = len(effort_per_sighting)
-    n_boostraping: int = 2_000
+    n_boostraping: int = 20
     required_effort: np.array = np.zeros(n_boostraping)
 
     success_probability: float = 0.99
@@ -49,9 +52,8 @@ def get_required_effort(name: str = "data/raw/data.csv", seed: bool = False):
 
     p_value_complement: float = 0.95
     reported_effort = np.quantile(required_effort, p_value_complement).astype(int)
-    print(
-        f'{{"required_effort": {reported_effort} ,\n "success_probability": {success_probability}, \n "significance_level": {1 - p_value_complement}, \n "effort_without_sighted": {effort_without_sighted}}}'
-    )
+    output: dict = {"required_effort": reported_effort, "success_probability": success_probability, "significance_level": 1 - p_value_complement, "effort_without_sighted": effort_without_sighted}
+    return output
 
 
 @app.command()
