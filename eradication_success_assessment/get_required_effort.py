@@ -18,10 +18,11 @@ def get_required_effort(name: str = "data/raw/data.csv", seed: bool = False):
     output = make_fit(data, capture_date, seed)
     print(output)
 
+
 def make_fit(data, capture_date, seed: bool = False):
     if seed:
         np.random.seed(3)
-    data_before_capture = _get_date_before_capture(data, capture_date) 
+    data_before_capture = _get_date_before_capture(data, capture_date)
     data_after_capture = _get_date_after_capture(data, capture_date)
 
     effort_without_sighted = data_before_capture["Cantidad_de_trampas_activas"].sum()
@@ -52,7 +53,12 @@ def make_fit(data, capture_date, seed: bool = False):
 
     p_value_complement: float = 0.95
     reported_effort = np.quantile(required_effort, p_value_complement).astype(int)
-    output: dict = {"required_effort": reported_effort, "success_probability": success_probability, "significance_level": 1 - p_value_complement, "effort_without_sighted": effort_without_sighted}
+    output: dict = {
+        "required_effort": reported_effort,
+        "success_probability": success_probability,
+        "significance_level": 1 - p_value_complement,
+        "effort_without_sighted": effort_without_sighted,
+    }
     return output
 
 
@@ -88,17 +94,20 @@ $\\alpha=$\\py{'%4.2f'% effort['significance_level']}.
 """
     )
 
+
 def _get_date_before_capture(data: pd.DataFrame, capture_date):
     date: pd.DataFrame = pd.to_datetime(data.Fecha)
     is_before_capture = date <= capture_date
     data_before_capture = data[is_before_capture]
     return data_before_capture
 
+
 def _get_date_after_capture(data: pd.DataFrame, capture_date):
     date: pd.DataFrame = pd.to_datetime(data.Fecha)
     is_after_capture = date > capture_date
     data_after_capture = data[is_after_capture]
     return data_after_capture
+
 
 if __name__ == "__main__":
     app()
