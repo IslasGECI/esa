@@ -10,7 +10,9 @@ app = typer.Typer()
 
 
 @app.command()
-def get_required_effort(name: str = "tests/data/camaras_trampa_erradicacion_rata_natividad.csv", seed: bool = False):
+def get_required_effort(
+    name: str = "tests/data/camaras_trampa_erradicacion_rata_natividad.csv", seed: bool = False
+):
     capture_date = pd.to_datetime("2019-11-09")
 
     datafile: str = name
