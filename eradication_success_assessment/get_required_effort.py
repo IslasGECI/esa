@@ -26,9 +26,7 @@ def make_fit(data, capture_date, seed: bool = False):
     data_after_capture = _get_date_after_capture(data, capture_date)
 
     effort_without_sighted = data_before_capture["Cantidad_de_trampas_activas"].sum()
-    data_before_capture["is_sighting"] = (
-        data_before_capture.Cantidad_de_avistamientos != 0
-    )
+    data_before_capture["is_sighting"] = data_before_capture.Cantidad_de_avistamientos != 0
     i_sighting = 0
 
     for i_index, i_row in data_before_capture.iterrows():
@@ -45,9 +43,7 @@ def make_fit(data, capture_date, seed: bool = False):
 
     success_probability: float = 0.99
     for i in range(n_boostraping):
-        resampled_effort_per_sighting = np.random.choice(
-            effort_per_sighting, n_effort_per_sighting
-        )
+        resampled_effort_per_sighting = np.random.choice(effort_per_sighting, n_effort_per_sighting)
         fit = genextreme.fit(resampled_effort_per_sighting)
         required_effort[i] = genextreme.ppf(success_probability, fit[0], fit[1], fit[2])
 
