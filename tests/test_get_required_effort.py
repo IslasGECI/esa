@@ -24,6 +24,7 @@ def test_make_fit():
     output: dict = make_fit(dates, capture_date, True)
     assert output == output_tests
 
+
 def test_get_required_effort():
     output: dict = get_required_effort()
     pass
