@@ -1,3 +1,4 @@
+import subprocess
 import eradication_success_assessment as esa
 import pandas as pd
 from eradication_success_assessment.get_required_effort import make_fit
@@ -28,3 +29,10 @@ def test_make_fit():
 def test_get_required_effort():
     output: dict = get_required_effort()
     pass
+
+
+def test_app_traps_camera():
+    bash_command = (
+        f"python eradication_success_assessment/get_required_effort.py get-required-effort"
+    )
+    subprocess.check_call(bash_command, shell=True)
