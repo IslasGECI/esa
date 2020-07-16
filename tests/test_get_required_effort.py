@@ -33,6 +33,6 @@ def test_get_required_effort():
 
 def test_app_traps_camera():
     bash_command = (
-        f"python eradication_success_assessment/get_required_effort.py get-required-efforti"
+        f"python eradication_success_assessment/get_required_effort.py get-required-effort"
     )
     subprocess.check_call(bash_command, shell=True)
