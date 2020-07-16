@@ -1,8 +1,10 @@
 import subprocess
 import eradication_success_assessment as esa
 import pandas as pd
+from pandas._testing import assert_frame_equal
 from eradication_success_assessment.get_required_effort import make_fit
 from eradication_success_assessment.get_required_effort import get_required_effort
+from eradication_success_assessment.get_required_effort import _add_sighting
 
 input_test: str = "tests/data/camaras_trampa_erradicacion_rata_natividad.csv"
 data: pd.DataFrame = pd.read_csv(input_test)
@@ -11,8 +13,17 @@ d: dict = {
     "Fecha": ["2019-11-09", "2019-11-08", "2019-11-10", "2019-11-11"],
     "Cantidad_de_trampas_activas": [1, 2, 3, 4],
     "Cantidad_de_avistamientos": [1, 0, 0, 0],
+    "is_sighting": [True, False, False, False],
+}
+d_2: dict = {
+    "Fecha": ["2019-11-09", "2019-11-08", "2019-11-10", "2019-11-11"],
+    "Cantidad_de_trampas_activas": [1, 2, 3, 4],
+    "Cantidad_de_avistamientos": [1, 0, 0, 0],
+    "is_sighting": [True, False, False, False],
+    "sighting": [1, 1, 1, 1],
 }
 dates: pd.DataFrame = pd.DataFrame(data=d)
+dates_2: pd.DataFrame = pd.DataFrame(data=d_2)
 output_tests = {
     "effort_without_sighted": 3,
     "required_effort": 3,
@@ -38,3 +49,8 @@ def test_app_traps_camera():
         f"python eradication_success_assessment/get_required_effort.py get-required-effort"
     )
     subprocess.check_call(bash_command, shell=True)
+
+
+def test_add_sighting():
+    output = _add_sighting(dates)
+    assert_frame_equal(dates_2, output, check_dtype=False)

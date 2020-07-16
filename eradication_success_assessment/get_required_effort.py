@@ -25,16 +25,10 @@ def make_fit(data, capture_date, seed: bool = False):
     if seed:
         np.random.seed(3)
     data_before_capture = _get_date_before_capture(data, capture_date)
-    data_after_capture = _get_date_after_capture(data, capture_date)
 
     effort_without_sighted = data_before_capture["Cantidad_de_trampas_activas"].sum()
     data_before_capture["is_sighting"] = data_before_capture.Cantidad_de_avistamientos != 0
-    i_sighting = 0
-
-    for i_index, i_row in data_before_capture.iterrows():
-        if i_row["is_sighting"]:
-            i_sighting = i_sighting + 1
-        data_before_capture.loc[i_index, "sighting"] = i_sighting
+    data_before_capture = _add_sighting(data_before_capture)
     effort_per_sighting = data_before_capture.groupby("sighting")[
         "Cantidad_de_trampas_activas"
     ].sum()
@@ -106,6 +100,14 @@ def _get_date_after_capture(data: pd.DataFrame, capture_date):
     data_after_capture = data[is_after_capture]
     return data_after_capture
 
+def _add_sighting(data: pd.DataFrame):
+    i_sighting = 0
+    for i_index, i_row in data.iterrows():
+        if i_row["is_sighting"]:
+            i_sighting = i_sighting + 1
+        data.loc[i_index, "sighting"] = i_sighting
+    return data
+    
 
 if __name__ == "__main__":
     app()
