@@ -1,7 +1,7 @@
 all: mutants
 
 repo = eradication_success_assessment
-codecov_token = eae768b1-8c32-40a8-89fd-6b7589f9efa8
+codecov_token = c29d80f3-6501-4816-b788-bc6170024d81
 
 .PHONY: all clean format install lint mutants tests
 
