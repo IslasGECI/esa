@@ -20,15 +20,17 @@ output_tests = {
     "success_probability": 0.99,
 }
 
+output_tests_2 = "{'required_effort': 2684655130924, 'success_probability': 0.99, 'significance_level': 0.050000000000000044, 'effort_without_sighted': 681}\n"
 
 def test_make_fit():
     output: dict = make_fit(dates, capture_date, True)
     assert output == output_tests
 
 
-def test_get_required_effort():
+def test_get_required_effort(capsys):
     output: dict = get_required_effort()
-    pass
+    captured = capsys.readouterr()
+    assert captured.out == output_tests_2
 
 
 def test_app_traps_camera():
