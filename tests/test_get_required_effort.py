@@ -47,13 +47,6 @@ def test_get_required_effort(capsys):
     assert captured.out != output_tests_2
 
 
-def test_app_traps_camera():
-    bash_command = (
-        f"python eradication_success_assessment/get_required_effort.py get-required-effort"
-    )
-    subprocess.check_call(bash_command, shell=True)
-
-
 def test_add_sighting():
     output = _add_sighting(dates)
     assert_frame_equal(dates_2, output, check_dtype=False)
