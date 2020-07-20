@@ -21,7 +21,7 @@ def get_required_effort(
     print(output)
 
 
-def make_fit(data, capture_date, seed: bool = False):
+def make_fit(data, capture_date, seed):
     if seed:
         np.random.seed(3)
     data_before_capture = _get_date_before_capture(data, capture_date)
