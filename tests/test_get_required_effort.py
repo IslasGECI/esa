@@ -39,9 +39,12 @@ def test_make_fit():
 
 
 def test_get_required_effort(capsys):
-    output: dict = get_required_effort()
+    output: dict = get_required_effort(seed=True)
     captured = capsys.readouterr()
     assert captured.out == output_tests_2
+    output: dict = get_required_effort()
+    captured = capsys.readouterr()
+    assert captured.out != output_tests_2
 
 
 def test_app_traps_camera():
