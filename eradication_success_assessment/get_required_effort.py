@@ -86,6 +86,10 @@ $\\alpha=$\\py{'%4.2f'% effort['significance_level']}.
 """
     )
 
+@app.command()
+def version():
+    print("v0.1.0")   
+
 
 def _get_date_before_capture(data: pd.DataFrame, capture_date):
     date: pd.DataFrame = pd.to_datetime(data.Fecha)
