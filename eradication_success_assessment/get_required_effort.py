@@ -34,7 +34,7 @@ def make_fit(data, capture_date, seed):
     ].sum()
 
     n_effort_per_sighting = len(effort_per_sighting)
-    n_boostraping: int = 20
+    n_boostraping: int = 30
     required_effort: np.array = np.zeros(n_boostraping)
 
     success_probability: float = 0.99
@@ -100,6 +100,7 @@ def _get_date_after_capture(data: pd.DataFrame, capture_date):
     data_after_capture = data[is_after_capture]
     return data_after_capture
 
+
 def _add_sighting(data: pd.DataFrame):
     i_sighting = 0
     for i_index, i_row in data.iterrows():
@@ -107,7 +108,7 @@ def _add_sighting(data: pd.DataFrame):
             i_sighting = i_sighting + 1
         data.loc[i_index, "sighting"] = i_sighting
     return data
-    
+
 
 if __name__ == "__main__":
     app()

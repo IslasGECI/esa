@@ -1,4 +1,3 @@
-import eradication_success_assessment as esa
 from eradication_success_assessment.get_required_effort import _get_date_before_capture
 from eradication_success_assessment.get_required_effort import _get_date_after_capture
 import pandas as pd
