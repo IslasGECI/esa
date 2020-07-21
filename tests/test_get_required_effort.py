@@ -34,17 +34,20 @@ output_tests_2 = "{'required_effort': 381, 'success_probability': 0.99, 'signifi
 
 
 def test_make_fit():
-    output: dict = make_fit(dates, capture_date, True)
+    output: dict = make_fit(dates, capture_date, True, n_bootstrapping=30)
     assert output == output_tests
 
 
 def test_get_required_effort(capsys):
+    output: dict = get_required_effort(seed=True, n_bootstrapping=30)
+    captured = capsys.readouterr()
+    assert captured.out == output_tests_2
+    output: dict = get_required_effort(n_bootstrapping=30)
+    captured = capsys.readouterr()
+    assert captured.out != output_tests_2
     output: dict = get_required_effort(seed=True)
     captured = capsys.readouterr()
     assert captured.out == output_tests_2
-    output: dict = get_required_effort()
-    captured = capsys.readouterr()
-    assert captured.out != output_tests_2
 
 
 def test_add_sighting():

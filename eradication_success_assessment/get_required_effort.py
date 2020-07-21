@@ -11,17 +11,19 @@ app = typer.Typer()
 
 @app.command()
 def get_required_effort(
-    name: str = "tests/data/camaras_trampa_erradicacion_rata_natividad.csv", seed: bool = False
+    name: str = "tests/data/camaras_trampa_erradicacion_rata_natividad.csv",
+    seed: bool = False,
+    n_bootstrapping: int = 30,
 ):
     capture_date = pd.to_datetime("2019-11-09")
 
     datafile: str = name
     data = pd.read_csv(datafile)
-    output = make_fit(data, capture_date, seed)
+    output = make_fit(data, capture_date, seed, n_bootstrapping)
     print(output)
 
 
-def make_fit(data, capture_date, seed):
+def make_fit(data, capture_date, seed, n_bootstrapping):
     if seed:
         np.random.seed(3)
     data_before_capture = _get_date_before_capture(data, capture_date)
@@ -34,7 +36,7 @@ def make_fit(data, capture_date, seed):
     ].sum()
 
     n_effort_per_sighting = len(effort_per_sighting)
-    n_boostraping: int = 30
+    n_boostraping: int = n_bootstrapping
     required_effort: np.array = np.zeros(n_boostraping)
 
     success_probability: float = 0.99
