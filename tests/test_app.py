@@ -2,9 +2,7 @@ import subprocess
 
 
 def test_app_traps_camera__get_required_effort():
-    bash_command = (
-        f"python eradication_success_assessment/get_required_effort.py get-required-effort"
-    )
+    bash_command = f"python eradication_success_assessment/get_required_effort.py get-required-effort --n-bootstrapping 30"
     subprocess.check_call(bash_command, shell=True)
 
 
