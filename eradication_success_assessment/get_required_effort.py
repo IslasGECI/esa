@@ -77,9 +77,9 @@ $$
 el tipo I es cuando $\\xi = 0$, el tipo II cuando $\\xi > 0$ y el tipo III con $\\xi<0$.
 
 Considerando los esfuerzos entre avistamientos, definimos la probabilidad de obtener una captura
-dependiendo del esfuerzo dado. De manera similar, podemos saber cuál es el esfuerzo necesario para 
-tener una probabilidad de éxito de erradicación deseada. A mayor esfuerzo, sin evidencia de rata, 
-la probabilidad del éxito en la erradicación será mayor. 
+dependiendo del esfuerzo dado. De manera similar, podemos saber cuál es el esfuerzo necesario para
+tener una probabilidad de éxito de erradicación deseada. A mayor esfuerzo, sin evidencia de rata, la
+probabilidad del éxito en la erradicación será mayor.
 
 Calculamos el esfuerzo necesario para alcanzar una probabilidad de 
 \\py{'%4.1f'% success_probability}\\%
