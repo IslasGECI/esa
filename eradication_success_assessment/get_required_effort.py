@@ -81,9 +81,9 @@ dependiendo del esfuerzo dado. De manera similar, podemos saber cuál es el esfu
 tener una probabilidad de éxito de erradicación deseada. A mayor esfuerzo, sin evidencia de rata, la
 probabilidad del éxito en la erradicación será mayor.
 
-Calculamos el esfuerzo necesario para alcanzar una probabilidad de 
+Calculamos el esfuerzo necesario para alcanzar una probabilidad de
 \\py{'%4.1f'% success_probability}\\%
-en el éxito de la erradicación, con un nivel de significancia del 
+en el éxito de la erradicación, con un nivel de significancia del
 $\\alpha=$\\py{'%4.2f'% effort['significance_level']}.
 """
     )
