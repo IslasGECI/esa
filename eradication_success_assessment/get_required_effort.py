@@ -61,11 +61,11 @@ def write_methodology():
     print(
         """
     \subsection*{Análisis}
-Utilizamos la función de distribución de valores extremos generalizada (GEV, por sus siglas en 
-inglés) para modelar la probabilidad de éxito en la erradiación de rata a partir de las 
+Utilizamos la función de distribución de valores extremos generalizada (GEV, por sus siglas en
+inglés) para modelar la probabilidad de éxito en la erradiación de rata a partir de las
 observaciones en cámaras trampa. La GEV es una familia de funciones continuas de probabilidad que
-combina las funciones de Gumbel, Fréchet y Weibull, conocidas como funciones de distribución de 
-valores extremos de tipo I, II y III: 
+combina las funciones de Gumbel, Fréchet y Weibull, conocidas como funciones de distribución de
+valores extremos de tipo I, II y III:
 $$
 f(s;\\xi) = \\left\\{
         \\begin{array}{ll}
