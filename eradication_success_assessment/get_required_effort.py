@@ -92,7 +92,7 @@ $\\alpha=$\\py{'%4.2f'% effort['significance_level']}.
 
 @app.command()
 def version():
-    ver = pkg_resources.require("eradication_success_assessment")[0].version
+    ver = "0.1.0"
     print(ver)
 
 
