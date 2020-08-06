@@ -15,4 +15,4 @@ def test_app_traps__version():
     bash_command = f"python eradication_success_assessment/get_required_effort.py version"
     subprocess.check_call(bash_command, shell=True)
     output = subprocess.getoutput(bash_command)
-    assert output == "v0.1.0"
+    assert output == "0.1.0"

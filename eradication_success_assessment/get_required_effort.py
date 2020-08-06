@@ -5,6 +5,7 @@ from scipy.stats import genextreme
 import numpy as np
 import pandas as pd
 import typer
+import pkg_resources
 
 app = typer.Typer()
 
@@ -60,7 +61,7 @@ def make_fit(data, capture_date, seed, n_bootstrapping):
 def write_methodology():
     print(
         """
-    \subsection*{Análisis}
+\\subsection*{Análisis}
 Utilizamos la función de distribución de valores extremos generalizada (GEV, por sus siglas en
 inglés) para modelar la probabilidad de éxito en la erradiación de rata a partir de las
 observaciones en cámaras trampa. La GEV es una familia de funciones continuas de probabilidad que
