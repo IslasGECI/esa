@@ -5,7 +5,6 @@ from scipy.stats import genextreme
 import numpy as np
 import pandas as pd
 import typer
-import pkg_resources
 
 app = typer.Typer()
 
@@ -92,6 +91,7 @@ $\\alpha=$\\py{'%4.2f'% effort['significance_level']}.
 
 @app.command()
 def version():
+    ver = "0.1.0"
     ver = pkg_resources.get_distribution("eradication_success_assessment").version
     print(ver)
 
