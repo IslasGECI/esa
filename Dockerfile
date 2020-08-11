@@ -16,4 +16,5 @@ RUN pip install \
     rope \
     scipy \
     typer
+RUN pip install .
 CMD make
