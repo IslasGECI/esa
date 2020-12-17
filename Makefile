@@ -35,6 +35,9 @@ lint:
 mutants:
 	mutmut run --paths-to-mutate ${repo}
 
-tests:
+coverage:
 	pytest --cov=${repo} --cov-report=xml --verbose && \
 	codecov --token=${codecov_token}
+
+tests:
+	pytest --verbose
