@@ -27,7 +27,7 @@ def make_fit(data, capture_date, seed, n_bootstrapping):
     if seed:
         np.random.seed(3)
     data_before_capture = _get_date_before_capture(data, capture_date)
-
+    # initialize_variables_for_effort()
     effort_without_sighted = data_before_capture["Cantidad_de_trampas_activas"].sum()
     data_before_capture["is_sighting"] = data_before_capture.Cantidad_de_avistamientos != 0
     data_before_capture = _add_sighting(data_before_capture)
@@ -40,6 +40,7 @@ def make_fit(data, capture_date, seed, n_bootstrapping):
     required_effort: np.array = np.zeros(n_boostraping)
 
     success_probability: float = 0.99
+    # get_effort_required()
     for i in range(n_boostraping):
         resampled_effort_per_sighting = np.random.choice(effort_per_sighting, n_effort_per_sighting)
         fit = genextreme.fit(resampled_effort_per_sighting)
@@ -47,6 +48,13 @@ def make_fit(data, capture_date, seed, n_bootstrapping):
 
     p_value_complement: float = 0.95
     reported_effort = np.quantile(required_effort, p_value_complement).astype(int)
+    output = export_output(
+        p_value_complement, reported_effort, success_probability, effort_without_sighted
+    )
+    return output
+
+
+def export_output(p_value_complement, reported_effort, success_probability, effort_without_sighted):
     output: dict = {
         "required_effort": reported_effort,
         "success_probability": success_probability,
