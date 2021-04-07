@@ -11,9 +11,15 @@ clean:
 	rm --recursive --force ${repo}/__pycache__
 	rm --recursive --force tests/__pycache__
 
-format:
+check:
 	black --check --line-length 100 ${repo}
 	black --check --line-length 100 tests
+	flake8 --max-line-length 100 ${repo}
+	flake8 --max-line-length 100 tests
+
+format:
+	black --line-length 100 ${repo}
+	black --line-length 100 tests
 
 install:
 	pip install --editable .
