@@ -29,19 +29,14 @@ def make_fit(data, capture_date, seed, n_bootstrapping):
     data_before_capture = _get_date_before_capture(data, capture_date)
     # initialize_variables_for_effort()
     effort_without_sighted = data_before_capture["Cantidad_de_trampas_activas"].sum()
-    data_before_capture["is_sighting"] = data_before_capture.Cantidad_de_avistamientos != 0
-    data_before_capture = _add_sighting(data_before_capture)
-    effort_per_sighting = data_before_capture.groupby("sighting")[
-        "Cantidad_de_trampas_activas"
-    ].sum()
+    effort_per_sighting = calculate_effort_per_sighting(data_before_capture)
 
     n_effort_per_sighting = len(effort_per_sighting)
-    n_boostraping: int = n_bootstrapping
-    required_effort: np.array = np.zeros(n_boostraping)
+    required_effort: np.array = np.zeros(n_bootstrapping)
 
     success_probability: float = 0.99
     # get_effort_required()
-    for i in range(n_boostraping):
+    for i in range(n_bootstrapping):
         resampled_effort_per_sighting = np.random.choice(effort_per_sighting, n_effort_per_sighting)
         fit = genextreme.fit(resampled_effort_per_sighting)
         required_effort[i] = genextreme.ppf(success_probability, fit[0], fit[1], fit[2])
@@ -62,6 +57,15 @@ def export_output(p_value_complement, reported_effort, success_probability, effo
         "effort_without_sighted": effort_without_sighted,
     }
     return output
+
+
+def calculate_effort_per_sighting(data_before_capture):
+    data_before_capture["is_sighting"] = data_before_capture.Cantidad_de_avistamientos != 0
+    data_before_capture = _add_sighting(data_before_capture)
+    effort_per_sighting = data_before_capture.groupby("sighting")[
+        "Cantidad_de_trampas_activas"
+    ].sum()
+    return effort_per_sighting
 
 
 @app.command()
