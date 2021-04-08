@@ -35,9 +35,9 @@ def make_fit(data, capture_date, seed, n_bootstrapping):
 
     p_value_complement: float = 0.95
     effort_without_sighted = data_before_capture["Cantidad_de_trampas_activas"].sum()
-    reported_effort = np.quantile(required_effort, p_value_complement).astype(int)
+    bound_effort = np.quantile(required_effort, p_value_complement).astype(int)
     output = export_output(
-        p_value_complement, reported_effort, success_probability, effort_without_sighted
+        p_value_complement, bound_effort, success_probability, effort_without_sighted
     )
     return output
 
@@ -53,9 +53,9 @@ def calculate_required_effort(data_before_capture, n_bootstrapping, success_prob
     return required_effort
 
 
-def export_output(p_value_complement, reported_effort, success_probability, effort_without_sighted):
+def export_output(p_value_complement, bound_effort, success_probability, effort_without_sighted):
     output: dict = {
-        "required_effort": reported_effort,
+        "required_effort": bound_effort,
         "success_probability": success_probability,
         "significance_level": 1 - p_value_complement,
         "effort_without_sighted": effort_without_sighted,
