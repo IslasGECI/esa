@@ -1,4 +1,4 @@
-# eradication_success_assessment
+# Eradication success assessment
 
 
 [![codecov](https://codecov.io/gh/IslasGECI/eradication_success_assessment/branch/master/graph/badge.svg)](https://codecov.io/gh/IslasGECI/eradication_success_assessment)
