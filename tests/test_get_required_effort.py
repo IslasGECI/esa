@@ -1,4 +1,3 @@
-import subprocess
 import pandas as pd
 from pandas._testing import assert_frame_equal
 from eradication_success_assessment import make_fit
@@ -30,7 +29,7 @@ output_tests = {
     "success_probability": 0.99,
 }
 
-output_tests_2 = "{'required_effort': 381, 'success_probability': 0.99, 'significance_level': 0.050000000000000044, 'effort_without_sighted': 681}\n"
+OUTPUT_TESTS_2 = "{'required_effort': 381, 'success_probability': 0.99, 'significance_level': 0.050000000000000044, 'effort_without_sighted': 681}\n"
 
 
 def test_make_fit():
@@ -39,15 +38,15 @@ def test_make_fit():
 
 
 def test_get_required_effort(capsys):
-    output: dict = get_required_effort(seed=True, n_bootstrapping=30)
+    get_required_effort(seed=True, n_bootstrapping=30)
     captured = capsys.readouterr()
-    assert captured.out == output_tests_2
-    output: dict = get_required_effort(n_bootstrapping=30)
+    assert captured.out == OUTPUT_TESTS_2
+    get_required_effort(n_bootstrapping=30)
     captured = capsys.readouterr()
-    assert captured.out != output_tests_2
-    output: dict = get_required_effort(seed=True)
+    assert captured.out != OUTPUT_TESTS_2
+    get_required_effort(seed=True)
     captured = capsys.readouterr()
-    assert captured.out == output_tests_2
+    assert captured.out == OUTPUT_TESTS_2
 
 
 def test_add_sighting():
