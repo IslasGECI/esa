@@ -37,10 +37,10 @@ linter:
 	$(call lint, ${repo})
 	$(call lint, tests)
 
-mutants:
+mutants: install
 	mutmut run --paths-to-mutate ${repo}
 
-coverage:
+coverage: install
 	pytest --cov=${repo} --cov-report=xml --verbose && \
 	codecov --token=${codecov_token}
 
