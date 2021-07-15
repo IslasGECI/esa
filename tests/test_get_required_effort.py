@@ -33,7 +33,7 @@ OUTPUT_TESTS_2 = "{'required_effort': 381, 'success_probability': 0.99, 'signifi
 
 
 def test_make_fit():
-    output: dict = make_fit(dates, capture_date, True, n_bootstrapping=30)
+    output: dict = make_fit(dates, capture_date, True, n_bootstrapping=30, return_effort = False)
     assert output == output_tests
 
 
