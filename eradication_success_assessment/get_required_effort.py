@@ -14,7 +14,7 @@ def get_required_effort(
     name: str = "tests/data/camaras_trampa_erradicacion_rata_natividad.csv",
     seed: bool = False,
     n_bootstrapping: int = 30,
-    return_effort = False
+    return_effort=False,
 ):
     capture_date = pd.to_datetime("2019-11-09")
 
@@ -23,6 +23,7 @@ def get_required_effort(
     output = make_fit(data, capture_date, seed, n_bootstrapping, return_effort)
     print(output)
     return output
+
 
 def make_fit(data, capture_date, seed, n_bootstrapping, return_effort):
     if seed:
