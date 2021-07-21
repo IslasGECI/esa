@@ -14,16 +14,18 @@ def get_required_effort(
     name: str = "tests/data/camaras_trampa_erradicacion_rata_natividad.csv",
     seed: bool = False,
     n_bootstrapping: int = 30,
+    return_effort=False,
 ):
     capture_date = pd.to_datetime("2019-11-09")
 
     datafile: str = name
     data = pd.read_csv(datafile)
-    output = make_fit(data, capture_date, seed, n_bootstrapping)
+    output = make_fit(data, capture_date, seed, n_bootstrapping, return_effort)
     print(output)
+    return output
 
 
-def make_fit(data, capture_date, seed, n_bootstrapping):
+def make_fit(data, capture_date, seed, n_bootstrapping, return_effort):
     if seed:
         np.random.seed(3)
 
@@ -39,6 +41,8 @@ def make_fit(data, capture_date, seed, n_bootstrapping):
     output = export_output(
         p_value_complement, bound_effort, success_probability, effort_without_sighted
     )
+    if return_effort:
+        return output, required_effort
     return output
 
 
@@ -107,7 +111,7 @@ $\\alpha=$\\py{'%4.2f'% effort['significance_level']}.
 
 @app.command()
 def version():
-    ver = "0.1.0"
+    ver = "0.2.0"
     print(ver)
 
 

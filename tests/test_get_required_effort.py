@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from pandas._testing import assert_frame_equal
 from eradication_success_assessment import make_fit
 from eradication_success_assessment import get_required_effort
@@ -33,8 +34,22 @@ OUTPUT_TESTS_2 = "{'required_effort': 381, 'success_probability': 0.99, 'signifi
 
 
 def test_make_fit():
-    output: dict = make_fit(dates, capture_date, True, n_bootstrapping=30)
+    output: dict = make_fit(dates, capture_date, True, n_bootstrapping=30, return_effort=False)
     assert output == output_tests
+
+    expected_output = {
+        "effort_without_sighted": 3,
+        "required_effort": 3,
+        "significance_level": 0.050000000000000044,
+        "success_probability": 0.99,
+    }
+    expected_required_effort = np.full((30), 3.0)
+
+    obtained_output, obtained_required_effort = make_fit(
+        dates, capture_date, True, n_bootstrapping=30, return_effort=True
+    )
+    assert obtained_output == expected_output
+    assert np.array(obtained_required_effort).all() == np.array(expected_required_effort).all()
 
 
 def test_get_required_effort(capsys):

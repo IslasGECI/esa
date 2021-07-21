@@ -1,7 +1,8 @@
-all: mutants
+all: check coverage mutants
 
 repo = eradication_success_assessment
 codecov_token = c29d80f3-6501-4816-b788-bc6170024d81
+
 define lint
 	pylint \
         --disable=bad-continuation \
@@ -10,13 +11,27 @@ define lint
         --disable=missing-module-docstring \
         ${1}
 endef
-.PHONY: all clean format install linter mutants tests
+
+.PHONY: \
+	all \
+	clean \
+	coverage \
+	check \
+	format \
+	install \
+	linter \
+	mutants \
+	tests
 
 clean:
 	rm --force .mutmut-cache
 	rm --recursive --force ${repo}.egg-info
 	rm --recursive --force ${repo}/__pycache__
 	rm --recursive --force tests/__pycache__
+
+coverage: install
+	pytest --cov=${repo} --cov-report=xml --verbose && \
+	codecov --token=${codecov_token}
 
 check:
 	black --check --line-length 100 ${repo}
@@ -37,12 +52,8 @@ linter:
 	$(call lint, ${repo})
 	$(call lint, tests)
 
-mutants:
+mutants: install
 	mutmut run --paths-to-mutate ${repo}
-
-coverage:
-	pytest --cov=${repo} --cov-report=xml --verbose && \
-	codecov --token=${codecov_token}
 
 tests:
 	pytest --verbose
