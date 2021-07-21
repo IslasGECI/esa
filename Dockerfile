@@ -1,6 +1,6 @@
-FROM python:3.7
-COPY . /workdir
+FROM python:3
 WORKDIR /workdir
+COPY . .
 RUN pip install \
     autopep8 \
     black \
@@ -11,10 +11,9 @@ RUN pip install \
     pandas \
     pylint \
     pylint-fail-under \
+    pytest \
     pytest-cov \
-    pytest==5.0.1 \
     rope \
     scipy \
     typer
-RUN pip install .
 CMD make

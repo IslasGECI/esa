@@ -111,7 +111,7 @@ $\\alpha=$\\py{'%4.2f'% effort['significance_level']}.
 
 @app.command()
 def version():
-    ver = "0.1.0"
+    ver = "0.2.0"
     print(ver)
 
 
