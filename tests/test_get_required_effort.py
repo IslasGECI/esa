@@ -14,17 +14,8 @@ d: dict = {
     "Cantidad_de_avistamientos": [1, 0, 0, 0],
     "is_sighting": [True, False, False, False],
 }
-d_2: dict = {
-    "Fecha": ["2019-11-09", "2019-11-08", "2019-11-10", "2019-11-11"],
-    "Cantidad_de_trampas_activas": [1, 2, 3, 4],
-    "Cantidad_de_avistamientos": [1, 0, 0, 0],
-    "is_sighting": [True, False, False, False],
-    "sighting": [1, 1, 1, 1],
-}
 dates: pd.DataFrame = pd.DataFrame(data=d)
-dates_2: pd.DataFrame = pd.DataFrame(data=d_2)
 
-OUTPUT_TESTS_2 = "{'required_effort': 381, 'success_probability': 0.99, 'significance_level': 0.050000000000000044, 'effort_without_sighted': 681}\n"
 
 
 def test_make_fit():
@@ -43,6 +34,7 @@ def test_make_fit():
     assert np.array(obtained_required_effort).all() == np.array(expected_required_effort).all()
 
 
+OUTPUT_TESTS_2 = "{'required_effort': 381, 'success_probability': 0.99, 'significance_level': 0.050000000000000044, 'effort_without_sighted': 681}\n"
 def test_get_required_effort(capsys):
     get_required_effort(seed=True, n_bootstrapping=30)
     captured = capsys.readouterr()
@@ -55,6 +47,14 @@ def test_get_required_effort(capsys):
     assert captured.out == OUTPUT_TESTS_2
 
 
+d_2: dict = {
+    "Fecha": ["2019-11-09", "2019-11-08", "2019-11-10", "2019-11-11"],
+    "Cantidad_de_trampas_activas": [1, 2, 3, 4],
+    "Cantidad_de_avistamientos": [1, 0, 0, 0],
+    "is_sighting": [True, False, False, False],
+    "sighting": [1, 1, 1, 1],
+}
+dates_2: pd.DataFrame = pd.DataFrame(data=d_2)
 def test_add_sighting():
     output = _add_sighting(dates)
     assert_frame_equal(dates_2, output, check_dtype=False)
