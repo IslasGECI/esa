@@ -23,20 +23,11 @@ d_2: dict = {
 }
 dates: pd.DataFrame = pd.DataFrame(data=d)
 dates_2: pd.DataFrame = pd.DataFrame(data=d_2)
-output_tests = {
-    "effort_without_sighted": 3,
-    "required_effort": 3,
-    "significance_level": 0.050000000000000044,
-    "success_probability": 0.99,
-}
 
 OUTPUT_TESTS_2 = "{'required_effort': 381, 'success_probability': 0.99, 'significance_level': 0.050000000000000044, 'effort_without_sighted': 681}\n"
 
 
 def test_make_fit():
-    output: dict = make_fit(dates, capture_date, True, n_bootstrapping=30, return_effort=False)
-    assert output == output_tests
-
     expected_output = {
         "effort_without_sighted": 3,
         "required_effort": 3,
