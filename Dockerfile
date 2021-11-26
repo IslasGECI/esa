@@ -6,6 +6,7 @@ RUN pip install \
     black \
     codecov \
     flake8 \
+    git+https://github.com/IslasGECI/geci_plots.git@v0.1.0 \
     mutmut \
     numpy \
     pandas \
