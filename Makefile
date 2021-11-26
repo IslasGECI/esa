@@ -29,7 +29,7 @@ clean:
 	rm --recursive --force ${repo}/__pycache__
 	rm --recursive --force tests/__pycache__
 
-coverage: install
+coverage: setup
 	pytest --cov=${repo} --cov-report=xml --verbose && \
 	codecov --token=${codecov_token}
 
@@ -45,14 +45,14 @@ format:
 	black --line-length 100 ${repo}
 	black --line-length 100 tests
 
-install:
+setup:
 	pip install --editable .
 
 linter:
 	$(call lint, ${repo})
 	$(call lint, tests)
 
-mutants: install
+mutants: setup
 	mutmut run --paths-to-mutate ${repo}
 
 tests:
