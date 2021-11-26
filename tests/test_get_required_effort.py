@@ -17,7 +17,6 @@ d: dict = {
 dates: pd.DataFrame = pd.DataFrame(data=d)
 
 
-
 def test_make_fit():
     expected_output = {
         "effort_without_sighted": 3,
@@ -35,6 +34,8 @@ def test_make_fit():
 
 
 OUTPUT_TESTS_2 = "{'required_effort': 381, 'success_probability': 0.99, 'significance_level': 0.050000000000000044, 'effort_without_sighted': 681}\n"
+
+
 def test_get_required_effort(capsys):
     get_required_effort(seed=True, n_bootstrapping=30)
     captured = capsys.readouterr()
@@ -55,6 +56,8 @@ d_2: dict = {
     "sighting": [1, 1, 1, 1],
 }
 dates_2: pd.DataFrame = pd.DataFrame(data=d_2)
+
+
 def test_add_sighting():
     output = _add_sighting(dates)
     assert_frame_equal(dates_2, output, check_dtype=False)
