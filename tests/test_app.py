@@ -14,8 +14,8 @@ def test_app_traps_camera__get_required_effort():
 
 
 def test_app_traps__write_methodology():
-    bash_command = "python eradication_success_assessment/get_required_effort.py write-methodology"
-    subprocess.check_call(bash_command, shell=True)
+    result = runner.invoke(app, ["write-methodology"])
+    assert result.exit_code == 0
 
 
 def test_app_traps__version():
