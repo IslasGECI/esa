@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 from pandas._testing import assert_frame_equal
 from eradication_success_assessment import make_fit
 from eradication_success_assessment import get_required_effort
@@ -56,7 +55,6 @@ def test_make_fit():
             3.0,
         ],
     }
-    expected_required_effort = np.full((30), 3.0)
 
     obtained_output = make_fit(dates, capture_date, True, n_bootstrapping=30, return_effort=True)
     assert obtained_output == expected_output
