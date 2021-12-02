@@ -139,5 +139,10 @@ def _add_sighting(data: pd.DataFrame):
     return data
 
 
+@app.command()
+def plot_histogram_effort():
+    pass
+
+
 if __name__ == "__main__":
     app()
