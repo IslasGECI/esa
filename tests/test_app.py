@@ -1,5 +1,6 @@
 import subprocess
 import pkg_resources
+import pytest
 
 from typer.testing import CliRunner
 
@@ -13,8 +14,12 @@ def test_app_traps_camera__get_required_effort():
     subprocess.check_call(bash_command, shell=True)
 
 
-def test_app_traps__write_methodology():
-    result = runner.invoke(app, ["write-methodology"])
+COMMANDS = ["write-methodology", "plot-histogram-effort", "version"]
+
+
+@pytest.mark.parametrize("command", COMMANDS)
+def test_app_traps__write_methodology(command):
+    result = runner.invoke(app, [command])
     assert result.exit_code == 0
 
 
@@ -22,7 +27,3 @@ def test_app_traps__version():
     expected_version = pkg_resources.require("eradication_success_assessment")[0].version
     result = runner.invoke(app, ["version"])
     assert expected_version in result.stdout
-
-def test_app_traps__plot_histogram_effort():
-    result = runner.invoke(app, ["plot_histogram_effort"])
-    assert result.exit_code == 0
