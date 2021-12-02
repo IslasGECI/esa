@@ -22,3 +22,7 @@ def test_app_traps__version():
     expected_version = pkg_resources.require("eradication_success_assessment")[0].version
     result = runner.invoke(app, ["version"])
     assert expected_version in result.stdout
+
+def test_app_traps__plot_histogram_effort():
+    result = runner.invoke(app, ["plot_histogram_effort"])
+    assert result.exit_code == 0
