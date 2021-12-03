@@ -5,6 +5,7 @@ from scipy.stats import genextreme
 import numpy as np
 import pandas as pd
 import typer
+import json
 
 app = typer.Typer()
 
@@ -21,7 +22,7 @@ def get_required_effort(
     datafile: str = name
     data = pd.read_csv(datafile)
     output = make_fit(data, capture_date, seed, n_bootstrapping, return_effort)
-    print(output)
+    print(json.dumps(output))
     return output
 
 
@@ -60,10 +61,10 @@ def calculate_required_effort(data_before_capture, n_bootstrapping, success_prob
 
 def export_output(p_value_complement, bound_effort, success_probability, effort_without_sighted):
     output: dict = {
-        "required_effort": bound_effort,
+        "required_effort": int(bound_effort),
         "success_probability": success_probability,
         "significance_level": 1 - p_value_complement,
-        "effort_without_sighted": effort_without_sighted,
+        "effort_without_sighted": int(effort_without_sighted),
     }
     return output
 
