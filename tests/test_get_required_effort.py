@@ -60,7 +60,7 @@ def test_make_fit():
     assert obtained_output == expected_output
 
 
-OUTPUT_TESTS_2 = "{'required_effort': 381, 'success_probability': 0.99, 'significance_level': 0.050000000000000044, 'effort_without_sighted': 681}\n"
+OUTPUT_TESTS_2 = '{"required_effort": 381, "success_probability": 0.99, "significance_level": 0.050000000000000044, "effort_without_sighted": 681}\n'
 
 
 def test_get_required_effort(capsys):
