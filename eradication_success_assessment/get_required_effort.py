@@ -9,6 +9,10 @@ import json
 
 app = typer.Typer()
 
+def read_json(path):
+    with open(path, "r") as read_file:
+        data = json.load(read_file)
+    return data
 
 @app.command()
 def get_required_effort(
@@ -141,8 +145,10 @@ def _add_sighting(data: pd.DataFrame):
 
 
 @app.command()
-def plot_histogram_effort():
-    pass
+def plot_histogram_effort(path: str):
+    data = read_json(path)
+    limits = [data["required_effort"], data["effort_without_sighted"]]
+    return limits
 
 
 if __name__ == "__main__":
