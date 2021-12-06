@@ -90,6 +90,7 @@ def test_add_sighting():
     output = _add_sighting(dates)
     assert_frame_equal(dates_2, output, check_dtype=False)
 
+
 def test_plot_histogram_effort():
     expected_limits = [381, 681]
     obtained_limits = plot_histogram_effort("salidita.json")

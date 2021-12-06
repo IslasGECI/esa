@@ -9,10 +9,12 @@ import json
 
 app = typer.Typer()
 
+
 def read_json(path):
     with open(path, "r") as read_file:
         data = json.load(read_file)
     return data
+
 
 @app.command()
 def get_required_effort(
