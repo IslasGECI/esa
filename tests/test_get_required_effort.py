@@ -2,6 +2,7 @@ import pandas as pd
 from pandas._testing import assert_frame_equal
 from eradication_success_assessment import make_fit
 from eradication_success_assessment import get_required_effort
+from eradication_success_assessment import plot_histogram_effort
 from eradication_success_assessment.get_required_effort import _add_sighting
 
 input_test: str = "tests/data/camaras_trampa_erradicacion_rata_natividad.csv"
@@ -88,3 +89,8 @@ dates_2: pd.DataFrame = pd.DataFrame(data=d_2)
 def test_add_sighting():
     output = _add_sighting(dates)
     assert_frame_equal(dates_2, output, check_dtype=False)
+
+def test_plot_histogram_effort():
+    expected_limits = [381, 681]
+    obtained_limits = plot_histogram_effort("salidita.json")
+    assert expected_limits == obtained_limits
