@@ -6,7 +6,7 @@ RUN pip install \
     black \
     codecov \
     flake8 \
-    git+https://github.com/IslasGECI/geci_plots.git@v0.1.0 \
+    git+https://github.com/IslasGECI/geci_plots.git@feature/return_fig_in_histogram_with_limits \
     mutmut \
     numpy \
     pandas \
@@ -14,6 +14,7 @@ RUN pip install \
     pylint-fail-under \
     pytest \
     pytest-cov \
+    pytest-mpl \
     rope \
     scipy \
     typer
