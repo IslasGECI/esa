@@ -1,3 +1,4 @@
+import pytest
 import pandas as pd
 from pandas._testing import assert_frame_equal
 from eradication_success_assessment import make_fit
@@ -91,7 +92,7 @@ def test_add_sighting():
     assert_frame_equal(dates_2, output, check_dtype=False)
 
 
+@pytest.mark.mpl_image_compare
 def test_plot_histogram_effort():
-    expected_limits = [381, 681]
-    obtained_limits = plot_histogram_effort("salidita.json")
-    assert expected_limits == obtained_limits
+    obtainad_histogram = plot_histogram_effort("salidita.json")
+    return obtainad_histogram
