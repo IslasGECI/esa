@@ -2,6 +2,7 @@
 #
 #
 from scipy.stats import genextreme
+from geci_plots import plot_histogram_with_limits
 import numpy as np
 import pandas as pd
 import typer
@@ -149,8 +150,10 @@ def _add_sighting(data: pd.DataFrame):
 @app.command()
 def plot_histogram_effort(path: str):
     data = read_json(path)
+    to_plot = [x for x in data["effort"] if x < 1000]
     limits = [data["required_effort"], data["effort_without_sighted"]]
-    return limits
+    figure = plot_histogram_with_limits(x=to_plot, bins=10, limits=limits)
+    return figure
 
 
 if __name__ == "__main__":
