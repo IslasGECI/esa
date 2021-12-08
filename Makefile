@@ -28,6 +28,7 @@ clean:
 	rm --recursive --force ${repo}.egg-info
 	rm --recursive --force ${repo}/__pycache__
 	rm --recursive --force tests/__pycache__
+	rm --recursive --force tests/baseline
 
 coverage: setup
 	pytest --cov=${repo} --cov-report=xml --verbose && \
