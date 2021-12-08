@@ -47,13 +47,14 @@ format:
 
 setup:
 	pip install --editable .
+	pytest --mpl-generate-path=tests/baseline
 
 linter:
 	$(call lint, ${repo})
 	$(call lint, tests)
 
 mutants: setup
-	mutmut run --paths-to-mutate ${repo}
+	mutmut run --paths-to-mutate ${repo} --runner "pytest --mpl"
 
 tests:
 	pytest --verbose
