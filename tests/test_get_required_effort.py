@@ -104,3 +104,4 @@ def test__clean_effort():
     df_data = pd.DataFrame.from_dict(DATA)
     expected_effort = [1, 2, 3]
     obtained_effort = _clean_effort(df_data)
+    assert expected_effort == obtained_effort
