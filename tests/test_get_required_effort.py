@@ -95,7 +95,7 @@ def test_add_sighting():
 
 @pytest.mark.mpl_image_compare
 def test_plot_histogram_effort():
-    obtainad_histogram = plot_histogram_effort("salidita.json")
+    obtainad_histogram = plot_histogram_effort(path = "tests/data/salidita.json")
     return obtainad_histogram
 
 
