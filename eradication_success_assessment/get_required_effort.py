@@ -148,7 +148,7 @@ def _add_sighting(data: pd.DataFrame):
 
 
 @app.command()
-def plot_histogram_effort(path: str):
+def plot_histogram_effort(path: str = "salidita.json"):
     data = read_json(path)
     to_plot = [x for x in data["effort"] if x < 1000]
     limits = [data["required_effort"], data["effort_without_sighted"]]
