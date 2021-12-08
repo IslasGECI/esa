@@ -5,6 +5,7 @@ from eradication_success_assessment import make_fit
 from eradication_success_assessment import get_required_effort
 from eradication_success_assessment import plot_histogram_effort
 from eradication_success_assessment.get_required_effort import _add_sighting
+from eradication_success_assessment.get_required_effort import _clean_effort
 
 input_test: str = "tests/data/camaras_trampa_erradicacion_rata_natividad.csv"
 data: pd.DataFrame = pd.read_csv(input_test)
@@ -96,3 +97,10 @@ def test_add_sighting():
 def test_plot_histogram_effort():
     obtainad_histogram = plot_histogram_effort("salidita.json")
     return obtainad_histogram
+
+
+def test__clean_effort():
+    DATA = {"effort": [1, 2, 3, 1000]}
+    df_data = pd.DataFrame.from_dict(DATA)
+    expected_effort = [1, 2, 3]
+    obtained_effort = _clean_effort(df_data)
