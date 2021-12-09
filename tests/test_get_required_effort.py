@@ -6,6 +6,7 @@ from eradication_success_assessment import get_required_effort
 from eradication_success_assessment import plot_histogram_effort
 from eradication_success_assessment.get_required_effort import _add_sighting
 from eradication_success_assessment.get_required_effort import _clean_effort
+from eradication_success_assessment.get_required_effort import app
 
 input_test: str = "tests/data/camaras_trampa_erradicacion_rata_natividad.csv"
 data: pd.DataFrame = pd.read_csv(input_test)
@@ -105,3 +106,7 @@ def test__clean_effort():
     expected_effort = [1, 2, 3]
     obtained_effort = _clean_effort(df_data)
     assert expected_effort == obtained_effort
+
+
+def test_app():
+    assert app is not None
