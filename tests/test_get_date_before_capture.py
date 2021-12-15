@@ -1,7 +1,7 @@
 from pandas._testing import assert_frame_equal
 import pandas as pd
-from eradication_success_assessment.get_required_effort import _get_date_before_capture
-from eradication_success_assessment.get_required_effort import _get_date_after_capture
+from esa.get_required_effort import _get_date_before_capture
+from esa.get_required_effort import _get_date_after_capture
 
 d: dict = {
     "Fecha": ["2019-11-09", "2019-11-08", "2019-11-10"],

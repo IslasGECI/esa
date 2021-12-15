@@ -1,12 +1,12 @@
 import pytest
 import pandas as pd
 from pandas._testing import assert_frame_equal
-from eradication_success_assessment import make_fit
-from eradication_success_assessment import get_required_effort
-from eradication_success_assessment import plot_histogram_effort
-from eradication_success_assessment.get_required_effort import _add_sighting
-from eradication_success_assessment.get_required_effort import _clean_effort
-from eradication_success_assessment.get_required_effort import app
+from esa import make_fit
+from esa import get_required_effort
+from esa import plot_histogram_effort
+from esa.get_required_effort import _add_sighting
+from esa.get_required_effort import _clean_effort
+from esa.get_required_effort import app
 
 input_test: str = "tests/data/camaras_trampa_erradicacion_rata_natividad.csv"
 data: pd.DataFrame = pd.read_csv(input_test)
