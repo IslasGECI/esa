@@ -85,45 +85,6 @@ def calculate_effort_per_sighting(data_before_capture):
     return effort_per_sighting
 
 
-@app.command()
-def write_methodology():
-    print(
-        """
-\\subsection*{Análisis}
-Utilizamos la función de distribución de valores extremos generalizada (GEV, por sus siglas en
-inglés) para modelar la probabilidad de éxito en la erradiación de rata a partir de las
-observaciones en cámaras trampa. La GEV es una familia de funciones continuas de probabilidad que
-combina las funciones de Gumbel, Fréchet y Weibull, conocidas como funciones de distribución de
-valores extremos de tipo I, II y III:
-$$
-f(s;\\xi) = \\left\\{
-        \\begin{array}{ll}
-            \\exp(-(1+\\xi s)^{\\frac{-1}{\\xi}}) & \\quad \\xi \\neq 0 \\\\
-            \\exp(-\\exp(-s)) & \\quad \\xi = 0
-        \\end{array}
-    \\right.
-$$
-el tipo I es cuando $\\xi = 0$, el tipo II cuando $\\xi > 0$ y el tipo III con $\\xi<0$.
-
-Considerando los esfuerzos entre avistamientos, definimos la probabilidad de obtener una captura
-dependiendo del esfuerzo dado. De manera similar, podemos saber cuál es el esfuerzo necesario para
-tener una probabilidad de éxito de erradicación deseada. A mayor esfuerzo, sin evidencia de rata, la
-probabilidad del éxito en la erradicación será mayor.
-
-Calculamos el esfuerzo necesario para alcanzar una probabilidad de
-\\py{'%4.1f'% success_probability}\\%
-en el éxito de la erradicación, con un nivel de significancia del
-$\\alpha=$\\py{'%4.2f'% effort['significance_level']}.
-"""
-    )
-
-
-@app.command()
-def version():
-    ver = "0.2.0"
-    print(ver)
-
-
 def _get_date_before_capture(data: pd.DataFrame, capture_date):
     date: pd.DataFrame = pd.to_datetime(data.Fecha)
     is_before_capture = date <= capture_date
