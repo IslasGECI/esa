@@ -6,7 +6,7 @@ from esa.get_required_effort import app
 runner = CliRunner()
 
 
-COMMANDS = ["write-methodology", "plot-histogram-effort", "version", "get-required-effort"]
+COMMANDS = ["plot-histogram-effort", "get-required-effort"]
 
 
 @pytest.mark.parametrize("command", COMMANDS)
