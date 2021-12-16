@@ -1,6 +1,6 @@
 all: check coverage mutants
 
-repo = eradication_success_assessment
+repo = esa
 codecov_token = c29d80f3-6501-4816-b788-bc6170024d81
 
 define lint
