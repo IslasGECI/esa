@@ -1,5 +1,4 @@
 import subprocess
-import pkg_resources
 
 
 def test_app_traps_camera__get_required_effort():

@@ -45,6 +45,7 @@ check:
 format:
 	black --line-length 100 ${repo}
 	black --line-length 100 tests
+	black --line-length 100 setup.py
 
 setup:
 	pip install --editable .
