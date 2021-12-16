@@ -1,6 +1,6 @@
 import pytest
 from typer.testing import CliRunner
-from eradication_success_assessment.get_required_effort import app
+from esa.get_required_effort import app
 
 
 runner = CliRunner()
