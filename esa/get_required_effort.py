@@ -5,32 +5,12 @@ from scipy.stats import genextreme
 from geci_plots import plot_histogram_with_limits
 import numpy as np
 import pandas as pd
-import typer
 import json
-
-app = typer.Typer()
-
 
 def read_json(path):
     with open(path, "r") as read_file:
         data = json.load(read_file)
     return data
-
-
-@app.command()
-def get_required_effort(
-    name: str = "tests/data/camaras_trampa_erradicacion_rata_natividad.csv",
-    seed: bool = False,
-    n_bootstrapping: int = 30,
-    return_effort: bool = False,
-):
-    capture_date = pd.to_datetime("2019-11-09")
-
-    datafile: str = name
-    data = pd.read_csv(datafile)
-    output = make_fit(data, capture_date, seed, n_bootstrapping, return_effort)
-    print(json.dumps(output))
-    return output
 
 
 def make_fit(data, capture_date, seed, n_bootstrapping, return_effort):
@@ -108,7 +88,6 @@ def _add_sighting(data: pd.DataFrame):
     return data
 
 
-@app.command()
 def plot_histogram_effort(path: str = "tests/data/salidita.json"):
     data = read_json(path)
     to_plot = _clean_effort(data)
@@ -120,7 +99,3 @@ def plot_histogram_effort(path: str = "tests/data/salidita.json"):
 def _clean_effort(data):
     to_plot = [x for x in data["effort"] if x < 1000]
     return to_plot
-
-
-if __name__ == "__main__":
-    app()
