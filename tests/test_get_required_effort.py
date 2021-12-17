@@ -2,7 +2,6 @@ import pytest
 import pandas as pd
 from pandas._testing import assert_frame_equal
 from esa import make_fit
-from esa import get_required_effort
 from esa import plot_histogram_effort
 from esa.get_required_effort import _add_sighting
 from esa.get_required_effort import _clean_effort

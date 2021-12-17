@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 import json
 
+
 def read_json(path):
     with open(path, "r") as read_file:
         data = json.load(read_file)
