@@ -6,7 +6,6 @@ from esa import get_required_effort
 from esa import plot_histogram_effort
 from esa.get_required_effort import _add_sighting
 from esa.get_required_effort import _clean_effort
-from esa.get_required_effort import app
 
 input_test: str = "tests/data/camaras_trampa_erradicacion_rata_natividad.csv"
 data: pd.DataFrame = pd.read_csv(input_test)
@@ -67,18 +66,6 @@ def test_make_fit():
 OUTPUT_TESTS_2 = '{"required_effort": 381, "success_probability": 0.99, "significance_level": 0.050000000000000044, "effort_without_sighted": 681}\n'
 
 
-def test_get_required_effort(capsys):
-    get_required_effort(seed=True, n_bootstrapping=30)
-    captured = capsys.readouterr()
-    assert captured.out == OUTPUT_TESTS_2
-    get_required_effort(n_bootstrapping=30)
-    captured = capsys.readouterr()
-    assert captured.out != OUTPUT_TESTS_2
-    get_required_effort(seed=True)
-    captured = capsys.readouterr()
-    assert captured.out == OUTPUT_TESTS_2
-
-
 d_2: dict = {
     "Fecha": ["2019-11-09", "2019-11-08", "2019-11-10", "2019-11-11"],
     "Cantidad_de_trampas_activas": [1, 2, 3, 4],
@@ -96,7 +83,7 @@ def test_add_sighting():
 
 @pytest.mark.mpl_image_compare
 def test_plot_histogram_effort():
-    obtainad_histogram = plot_histogram_effort(path="tests/data/salidita.json")
+    obtainad_histogram = plot_histogram_effort()
     return obtainad_histogram
 
 
@@ -106,7 +93,3 @@ def test__clean_effort():
     expected_effort = [1, 2, 3]
     obtained_effort = _clean_effort(df_data)
     assert expected_effort == obtained_effort
-
-
-def test_app():
-    assert app is not None
