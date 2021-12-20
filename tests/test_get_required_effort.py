@@ -62,7 +62,12 @@ def test_make_fit():
     assert obtained_output == expected_output
 
 
-OUTPUT_TESTS_2 = {"effort_without_sighted": 681, "required_effort": 381, "significance_level": 0.050000000000000044, "success_probability": 0.99}
+OUTPUT_TESTS_2 = {
+    "effort_without_sighted": 681,
+    "required_effort": 381,
+    "significance_level": 0.050000000000000044,
+    "success_probability": 0.99,
+}
 
 
 def test_make_fit_from_file():
@@ -70,7 +75,8 @@ def test_make_fit_from_file():
     data = pd.read_csv(path)
     capture_date = pd.to_datetime("2019-11-09")
     obtained_effort = make_fit(data, capture_date, True, 30, False)
-    assert  OUTPUT_TESTS_2 == obtained_effort, "No son iguales"
+    assert OUTPUT_TESTS_2 == obtained_effort, "No son iguales"
+
 
 d_2: dict = {
     "Fecha": ["2019-11-09", "2019-11-08", "2019-11-10", "2019-11-11"],
