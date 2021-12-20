@@ -64,6 +64,9 @@ def test_make_fit():
 
 OUTPUT_TESTS_2 = '{"required_effort": 381, "success_probability": 0.99, "significance_level": 0.050000000000000044, "effort_without_sighted": 681}\n'
 
+def test_make_fit_from_file():
+    path = "tests/data/camaras_trampa_erradicacion_rata_natividad.csv"
+    data = pd.read_csv(path)
 
 d_2: dict = {
     "Fecha": ["2019-11-09", "2019-11-08", "2019-11-10", "2019-11-11"],
